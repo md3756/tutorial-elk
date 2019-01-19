@@ -1,0 +1,16 @@
+Assuming docker-elk is running, follow the guide: https://www.elastic.co/guide/en/kibana/current/tutorial-load-dataset.html
+
+
+- Commands for uploading json data (using file names from guide, note the included -u option in the requests below)
+        - `curl -u elastic:changeme -H 'Content-Type: application/x-ndjson' -XPOST 'localhost:9200/bank/account/_bulk?pretty' --data-binary @accounts.json`
+        - `curl -u elastic:changeme -H 'Content-Type: application/x-ndjson' -XPOST 'localhost:9200/shakespeare/doc/_bulk?pretty' --data-binary @shakespeare_6.0.json`
+        - `curl -u elastic:changeme -H 'Content-Type: application/x-ndjson' -XPOST 'localhost:9200/_bulk?pretty' --data-binary @logs.jsonl`
+
+- Mapping
+        - Although the guide suggests creating mappings before uploading data toelasticsearch, mappings are automatically created on upload by elasticsearch, so the step is not necessary
+
+- Bulk
+        - "bulk?pretty" is required for bulk uploads of json in json files
+        - without bulk?pretty
+                - only one json object per file can be uploaded (including more than one object in parallel will cause a json parse failure)
+                - metadata is no longer required (including metadata will cause the error in the point above)

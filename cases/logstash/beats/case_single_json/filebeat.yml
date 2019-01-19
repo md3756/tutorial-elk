@@ -1,0 +1,43 @@
+﻿#=========================== Filebeat inputs =============================
+
+filebeat.inputs:
+- type: log
+  enabled: true
+  paths:
+    - /home/roni/Practice/Elk/data/data_upload_methods/parallel_objects.json
+  multiline.pattern: "^{"		# Any open bracket to the *far left*
+  multiline.negate: true		# Add any string not matching the pattern
+  multiline.match: after		# Add to string where pattern was located
+  multiline.max_lines: 0		# Prevents truncation (problem for massive json files)
+
+#============================= Filebeat modules ===============================
+
+filebeat.config.modules:
+  path: ${path.config}/modules.d/*.yml
+  reload.enabled: false
+
+#==================== Elasticsearch template setting ==========================
+
+setup.template.settings:
+  index.number_of_shards: 3
+
+#-------------------------- Elasticsearch output ------------------------------
+#output.elasticsearch:
+  # Array of hosts to connect to.
+  #hosts: ["localhost:9200"]
+
+#----------------------------- Logstash output --------------------------------
+output.logstash:
+  # The Logstash hosts
+  hosts: ["localhost:5000"]
+  username: "elastic"
+  password: "changeme"
+
+processors:
+  - decode_json_fields:		# The equivalent of including json plugin in pipeline
+      fields: ["message"]
+      process_array: false
+      target: ""
+      overwrite_keys: false
+  - add_host_metadata: ~
+  - add_cloud_metadata: ~
