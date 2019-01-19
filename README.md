@@ -5,7 +5,9 @@ ___
 ___
 - ## Intro ##
 	- Below, there are a few cases of how input json data might be structured, however there are many more cases than listed
-	- For each case, there is a link to a github folder containing code samples; actual samples are not included here, as the document would become too long
+	- Using Case Bundles
+		- For each case, there is a corresponding folder in tutorial-elk/cases containing code samples
+		- **Each case folder is a bundle that contains a formatting of json, as well as all code snippets required to handle parsing the data; to test the various methods of uploading data, make changes to docker-elk using the snippets found in a case folder, run docker-elk, then upload data found in the case folder (for example, through a curl command)**
 	- Although there are many cases not covered, by using logstash, an approach to prepare data for storage is possible given any input structure (below, the point: Logstash > One line request > case 3, is a great example of versatility of logstash)
 	- Testing docker-elk
 		- To start, run docker-elk, by changing directory to docker-elk, and running:
