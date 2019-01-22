@@ -5,7 +5,7 @@
 	- Each folder beginning with "case_" contains all the snippets needed to upload data that is structured the way the the folder specifies; for example, the files associated with handling array json, would be found in `/tutorial-elk/cases/logstash/https/case_array_json/` (https://github.com/roni99/tutorial-elk/tree/master/cases/logstash/http/case_array_json)
 	- To use whichever bundle desired, place the files in their proper locations, in the case of tutorial/docker-elk
 		- for **.conf**, place in `docker-elk/logstash/pipeline`
-		- for **.rb**, `place in docker-elk/logstash/ruby_filter_script`
+		- for **.rb**, place in `docker-elk/logstash/ruby_filter_script`
 		- for **.json**, place anywhere when used for curl, but match the location of paths specified in filebeat.yml when using filebeat
 	- To add new folders to the dockerized stack, read: https://github.com/roni99/tutorial-elk/edit/master/cases/logstash/using_custom_scripts.md
 
