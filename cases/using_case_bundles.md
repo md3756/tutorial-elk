@@ -1,4 +1,4 @@
-## Using Case Bundles ##
+# Using Case Bundles #
 
 - ## Case Bundles ##
 	- A case stands for a method of handling uploading of an arbitrary structure of json
