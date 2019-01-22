@@ -23,15 +23,15 @@ ___
 	- **Logstash**
 		- One line request through curl
 			- **case 1**: Target JSON object is the only object in the file:
-				>`curl -H “content-type: application/json” localhost:5000 -d @file.json`
+				>`curl -H "content-type: application/json" localhost:5000 -d @file.json`
 			- **case 2**: Target JSON objects are in an array, and there is only one highest level object in file
 				- Approach
 					- In logstash pipeline file, include:
-						> `split { field => “fieldName” }`
+						> `split { field => "fieldName" }`
 				- keep in mind: split will create an event for each array item; in the events they are contained in, each item will be placed into a field named fieldName (arbitrary)
 				- Although the highest level obect would be parsed correctly if approach above is not taken, outputing to elasticsearch would result in one document containing all the target data
 				- command:
-					`curl -H “content-type: application/json” localhost:5000 -d @file.json`
+					> `curl -H "content-type: application/json" localhost:5000 -d @file.json`
 			- **case 3**: Target JSON objects are in parallel
 				- Parallel objects: objects that would all be siblings if they were wrapped in one object (example file: {} {} {})
 				- In the command below, note how there is no header specified; this is because the json header would result in only the first json object being parsed
@@ -49,18 +49,18 @@ ___
 				- Approach
 					- install filebeat: https://www.elastic.co/guide/en/beats/filebeat/current/setup-repositories.html
 					- In filebeat.yml, under filebeat.inputs.paths, include the path to a json file
-					- under “filebeat.input,” add the following:
-					  > multiline.pattern: “^{”		# Any open bracket to the far left
-					  > multiline.negate: true		# Add any string not matching the pattern
-					  > multiline.match: after		# Add to string where pattern was located
-					  > multiline.max_lines: 0		# Prevents truncation
-					- under “filebeat.processors,” add the following:
-					  > - decode_json_fields:
-					  >     fields: ["message"]
-					  >     process_array: false
-					  >     max_depth: 1
-					  >     target: ""
-					  >     overwrite_keys: false
+					- under "filebeat.input," add the following:
+					  > multiline.pattern: "^{";		# Any open bracket to the far left
+					  > multiline.negate: true;		# Add any string not matching the pattern
+					  > multiline.match: after;		# Add to string where pattern was located
+					  > multiline.max_lines: 0;		# Prevents truncation
+					- under "filebeat.processors," add the following:
+					  > - decode_json_fields:;
+					  >     fields: ["message"];
+					  >     process_array: false;
+					  >     max_depth: 1;
+					  >     target: "";
+					  >     overwrite_keys: false;
 					- start filebeat with command:
 						> `sudo ./filebeat -e`
 	- **Elasticsearch**
@@ -78,8 +78,8 @@ ___
 ___
 - ## Technical Details ##
 	- including json header in curl
-		- if a header of “content-type: application/json” included in curl, there is no need to include json filter plugin, parsing occurs automatically (this is one example of versatility of logstash; there are multiple locations to include options that complete the same task)
-		- including header of “content-type: application/json” will also remove the message field; which may restrict some options, such as the custom ruby script that parses json (to keep the message field, do not include the header)
+		- if a header of "content-type: application/json" included in curl, there is no need to include json filter plugin, parsing occurs automatically (this is one example of versatility of logstash; there are multiple locations to include options that complete the same task)
+		- including header of "content-type: application/json" will also remove the message field; which may restrict some options, such as the custom ruby script that parses json (to keep the message field, do not include the header)
 		- the header will also cause only the first object in a file to be parsed (if planning to upload multiple items while also including header, wrapping the objects in a dummy array and including the split filter in the logstash pipeline is a robust workaround)
 ___
 - ## Notes ##
