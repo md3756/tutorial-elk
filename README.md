@@ -50,17 +50,27 @@ ___
 					- install filebeat: https://www.elastic.co/guide/en/beats/filebeat/current/setup-repositories.html
 					- In filebeat.yml, under filebeat.inputs.paths, include the path to a json file
 					- under "filebeat.input," add the following:
-					  > multiline.pattern: "^{";		# Any open bracket to the far left
-					  > multiline.negate: true;		# Add any string not matching the pattern
-					  > multiline.match: after;		# Add to string where pattern was located
-					  > multiline.max_lines: 0;		# Prevents truncation
+					  > multiline.pattern: "^{"		# Any open bracket to the far left
+					  
+					  > multiline.negate: true		# Add any string not matching the pattern
+					  
+					  > multiline.match: after		# Add to string where pattern was located
+					  
+					  > multiline.max_lines: 0		# Prevents truncation
+					  
 					- under "filebeat.processors," add the following:
-					  > - decode_json_fields:;
-					  >     fields: ["message"];
-					  >     process_array: false;
-					  >     max_depth: 1;
-					  >     target: "";
-					  >     overwrite_keys: false;
+					  > - decode_json_fields:
+					  
+					  >     fields: ["message"]
+					  
+					  >     process_array: false
+					  
+					  >     max_depth: 1
+					  
+					  >     target: ""
+					  
+					  >     overwrite_keys: false
+					  
 					- start filebeat with command:
 						> `sudo ./filebeat -e`
 	- **Elasticsearch**
