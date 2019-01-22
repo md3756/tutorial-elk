@@ -59,7 +59,7 @@ ___
 					  > multiline.max_lines: 0		# Prevents truncation
 					  
 					- under "filebeat.processors," add the following:
-					  > - decode_json_fields:
+					  > \- decode_json_fields:
 					  
 					  >     fields: ["message"]
 					  
