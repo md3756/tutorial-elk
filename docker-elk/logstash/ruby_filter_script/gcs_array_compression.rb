@@ -16,8 +16,8 @@ def filter(event)
 	# Purpose of script: remove all but specified fields in items list (each item contains google search results in json format)
 	# [field] is notation used by event object to access fields from logstash events
 
-	search_links = get_fields_from(event, "link", "[googleImageSearch][items]")
-	search_images = get_fields_from(event, "image", "[googleImageSearch][items]")
+	search_links = get_fields_from(event, "link", "[googleImageSearches][items]")
+	search_images = get_fields_from(event, "image", "[googleImageSearches][items]")
 
 	# all items contain same data; length of above arrays equal
 	# create new hashes equal to the previous amount of items; add only desired fields back to the new hashes, then add all the hashes into a compressed array
@@ -31,12 +31,12 @@ def filter(event)
 		compressed_items.push(item_hash)
 	end
 
-	event.set("[googleImageSearch][items]", compressed_items)
+	event.set("[googleImageSearches][items]", compressed_items)
 
 	# Removing arbitrary fields
-	event.remove("[googleImageSearch][queries][request][0][cx]")
-	event.remove("[googleImageSearch][queries][nextPage][0][cx]")
-	event.remove("[googleImageSearch][url]")
+	event.remove("[googleImageSearches][queries][request][0][cx]")
+	event.remove("[googleImageSearches][queries][nextPage][0][cx]")
+	event.remove("[googleImageSearches][url]")
 
 	return [event]
 
