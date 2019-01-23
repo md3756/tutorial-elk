@@ -13,8 +13,8 @@ ___
 		- To start, run docker-elk, by changing directory to docker-elk, and running:
 			> `docker-compose up`
 		- After the stack loads, enter Kibana through a browser (Kibana listens on port 5601)
-		- Run command (attach the file: https://github.com/roni99/tutorial-elk/blob/master/cases/logstash/http/case_array_json/array_wrapped_objects.json):
-			> `curl localhost:5000 -d @array_wrapped_objects.json`
+		- Run command (attach the file: https://github.com/roni99/tutorial-elk/blob/master/cases/logstash/http/case_parallel_json/parallel_objects.json):
+			> `curl localhost:5000 -d @parallel_objects.json`
 		- Visualize the results on Kibana
 		- When done, press `ctrl + c` twice, then run:
 			> `docker-compose down`
