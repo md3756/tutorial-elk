@@ -1,4 +1,4 @@
-# Methods for Bulk Uploading JSON of Various Structure to ELK #
+# Bulk Uploading JSON to ELK #
 ___
 - ## Purpose ##
 	- Documentation of different methods of creating separate events from a file containing JSON data
