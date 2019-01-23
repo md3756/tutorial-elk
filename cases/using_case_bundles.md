@@ -11,7 +11,7 @@
 
 - ## Changing Pipeline ##
 	- All pipeline scripts end in `.conf`
-	- The file specifying the pipeline in docker elk,  `/path-to/docker-elk/logstash/pipeline/logstash.conf`, is the file: `/usr/share/logstash/config/pipeline.yml`, in the dockerized logstash
+	- The file specifying the default pipeline for dockerized logstash,  `/path-to/docker-elk/logstash/pipeline/logstash.conf`, is the file: `/usr/share/logstash/config/pipeline.yml`, in the logstash image
 	- To change the pipeline script, either edit the docker-compose.yml file to include a volume from any arbitrary folder in localhost to the ELK image (specifically to path written above: /usr/...), or paste the desired pipeline script into docker-elk/logstash/pipeline/logstash.conf (which will require less work, good for testing)
 
 - ## Pitfalls ##
