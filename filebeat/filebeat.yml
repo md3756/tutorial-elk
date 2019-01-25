@@ -5,10 +5,10 @@ filebeat.inputs:
   enabled: true
   paths:
     - ../cases/logstash/beats/case_single_json/*.json
-#  multiline.pattern: "^{"
-#  multiline.negate: true
-#  multiline.match: after
-#  multiline.max_lines: 0
+  multiline.pattern: "^{"
+  multiline.negate: true
+  multiline.match: after
+  multiline.max_lines: 0
 
 #============================= Filebeat modules ===============================
 
